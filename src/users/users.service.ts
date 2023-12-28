@@ -12,7 +12,6 @@ export class UsersService {
     private userRepository: Repository<User>,
   ) {}
   create(createUserDto: CreateUserDto) {
-    console.log(`Ver User: ${createUserDto.nome}`)
     return this.userRepository.save(createUserDto);
   }
 
