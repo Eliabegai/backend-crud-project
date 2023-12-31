@@ -17,9 +17,12 @@ export class AnimeList {
   @Column()
   status: string;
 
-  @Column()
-  scanName: string;
+  @Column({ type:'json', nullable: true})
+  scan: {
+    name: string;
+    url: string;
+  }
 
   @Column()
-  scanUrl: string;
+  imageUrl: string;
 }

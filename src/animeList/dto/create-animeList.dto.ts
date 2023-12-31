@@ -1,3 +1,4 @@
+
 export class CreateAnimeListDto {
   name?: string
   type?: string
@@ -5,5 +6,9 @@ export class CreateAnimeListDto {
   status?: string
   scanName?: string
   scanUrl?: string
-  image?: File
+  imageUrl?: string
+  scan?: {
+    name: string
+    url: string
+  }
 }

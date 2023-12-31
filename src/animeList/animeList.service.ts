@@ -9,8 +9,7 @@ import { AnimeList } from './entities/animeList.entity';
 export class AnimeListService {
   constructor(
     @InjectRepository(AnimeList)
-    private animeListRepository:
-    Repository<AnimeList>,
+    private animeListRepository: Repository<AnimeList>
   ){}
   
   create(createAnimeListDto: CreateAnimeListDto) {

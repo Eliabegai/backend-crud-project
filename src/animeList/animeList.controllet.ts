@@ -5,7 +5,7 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
+  Delete
 } from '@nestjs/common';
 
 import { AnimeListService } from './animeList.service';
@@ -14,7 +14,9 @@ import { UpdateAnimeListDto } from './dto/update-animeList.dto';
 
 @Controller('/animes')
 export class AnimeListController {
-  constructor(private readonly animeListService: AnimeListService) {}
+  constructor(
+    private readonly animeListService: AnimeListService
+  ){}
 
   @Post()
   async create(@Body() createAnimeListDto:CreateAnimeListDto){
