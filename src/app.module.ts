@@ -5,10 +5,9 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AnimeListModule } from './animeList/animeList.module';
 import { config } from './ormconfig';
-import { FilesModule } from './files/files.module';
 
 @Module({
-  imports: [UsersModule, AnimeListModule, TypeOrmModule.forRoot(config), FilesModule],
+  imports: [UsersModule, AnimeListModule, TypeOrmModule.forRoot(config)],
   controllers: [AppController],
   providers: [AppService],
 })
