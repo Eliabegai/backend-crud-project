@@ -38,9 +38,13 @@ export class FilesController {
     return this.filesService.salvarVariosDados(files['arquivos'], req);
   }
 
+  @Post('insert')
+  saveImageCloud(file){
+    return this.filesService.saveImageCloud(file)
+  }
+
   @Get()
   findAll() {
-    console.log('Get All Values')
     return this.filesService.findAll()
   }
 }

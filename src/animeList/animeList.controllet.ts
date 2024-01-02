@@ -25,7 +25,6 @@ export class AnimeListController {
 
   @Get()
   findAll() {
-    console.log('Get All Values')
     return this.animeListService.findAll()
   }
 
