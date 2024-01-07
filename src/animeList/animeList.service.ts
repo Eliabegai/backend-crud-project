@@ -16,8 +16,15 @@ export class AnimeListService {
     return this.animeListRepository.save(createAnimeListDto)
   }
 
-  findAll() {
-    return this.animeListRepository.find();
+  async findAll() {
+
+    const data = await this.animeListRepository.find()
+    const count = await this.animeListRepository.count()
+
+    return {
+      data: data,
+      count: count
+    };
   }
 
   findOne(id: number) {
