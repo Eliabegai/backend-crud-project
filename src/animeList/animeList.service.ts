@@ -17,8 +17,9 @@ export class AnimeListService {
   }
 
   async findAll() {
-
-    const data = await this.animeListRepository.find()
+    const data = await this.animeListRepository.createQueryBuilder('animeList')
+    .orderBy('animeList.name', 'ASC') // Substitua 'nome' pelo campo que deseja ordenar
+    .getMany()
     const count = await this.animeListRepository.count()
 
     return {
@@ -27,9 +28,25 @@ export class AnimeListService {
     };
   }
 
-  async findAllByFilter(status: string){
-    const data = await this.animeListRepository.findBy({ status })
+  async findAllByStatus(status: string){
+    const data = await this.animeListRepository.createQueryBuilder('animeList')
+    .where('animeList.status = :status', { status })
+    .orderBy('animeList.name', 'ASC') // Substitua 'nome' pelo campo que deseja ordenar
+    .getMany()
     const count = await this.animeListRepository.countBy({ status })
+    return {
+      data: data,
+      count: count
+    };
+  }
+
+  async findAllByName(name: string){
+    // const data = await this.animeListRepository.findBy({ name })
+    const data = await this.animeListRepository.createQueryBuilder('animeList')
+    .where('animeList.name LIKE :letra', { letra: `${name}%` })
+    .orderBy('animeList.name', 'ASC') // Ordena os resultados pelo nome, se necessário
+    .getMany()
+    const count = await this.animeListRepository.countBy({ name })
     return {
       data: data,
       count: count
