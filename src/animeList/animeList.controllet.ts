@@ -28,6 +28,12 @@ export class AnimeListController {
     return this.animeListService.findAll()
   }
 
+  @Get(':status')
+  findAllByFilter(@Param('status') status: string) {
+    console.log(`Procurando pelo status ${status}`)
+    return this.animeListService.findAllByFilter(status)
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.animeListService.findOne(+id);

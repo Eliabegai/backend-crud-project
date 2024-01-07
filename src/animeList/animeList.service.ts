@@ -27,6 +27,15 @@ export class AnimeListService {
     };
   }
 
+  async findAllByFilter(status: string){
+    const data = await this.animeListRepository.findBy({ status })
+    const count = await this.animeListRepository.countBy({ status })
+    return {
+      data: data,
+      count: count
+    };
+  }
+
   findOne(id: number) {
     return this.animeListRepository.findOneBy({ id: id });
   }
