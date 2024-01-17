@@ -7,7 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://eliabegai:Gi70vpMMCnnM20L7@cluster0.atuhfqo.mongodb.net/'),
+    MongooseModule.forRoot(process.env.MONGODB_USER),
     UsersModule, 
     AnimeListModule
   ],
