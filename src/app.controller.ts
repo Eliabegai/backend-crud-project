@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import path from 'path';
 
 @Controller()
 export class AppController {
@@ -9,4 +10,9 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('/favicon.ico')
+  serveFavicon() {
+  return this.appService.serveFavicon();
+}
 }

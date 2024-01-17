@@ -15,4 +15,7 @@ export class AppService {
     `
     return text;
   }
+  serveFavicon() {
+    return 'favicon'
+  }
 }
