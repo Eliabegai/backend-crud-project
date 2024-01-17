@@ -7,13 +7,11 @@ async function bootstrap() {
   require('dotenv').config()
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  const PORT = process.env.PORT || 3000
+  const port = process.env.PORT || 3000
 
-  console.log(process.env.USERNAME)
+  await app.listen(port);
 
-  app.enableCors();
-
-  await app.listen(PORT, () => console.log(`Server Running in  ${ PORT }`));
+  console.log(`Server Running in  ${ port }`)
 
 }
 bootstrap();
