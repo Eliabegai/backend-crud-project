@@ -1,28 +1,66 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+// import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
 
-@Entity()
-export class AnimeList {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
+export type AnimeDocument = NewAnimeList & Document;
 
-  @Column()
+@Schema()
+export class NewAnimeList {
+  @Prop()
   name: string;
 
-  @Column()
+  @Prop()
   type: string;
 
-  @Column()
+  @Prop()
+  password: string;
+
+  @Prop()
   chapter: number;
 
-  @Column()
+  @Prop()
   status: string;
 
-  @Column({ type:'json', nullable: true})
+  @Prop({ type: Array})
   scan: {
     name: string;
     url: string;
   }
 
-  @Column()
+  @Prop()
   imageUrl: string;
 }
+
+export const AnimeSchema = SchemaFactory.createForClass(NewAnimeList);
+
+// @Entity()
+// export class AnimeList {
+//   @PrimaryGeneratedColumn('increment')
+//   id: number;
+
+//   @Column()
+//   name: string;
+
+//   @Column()
+//   type: string;
+
+//   @Column()
+//   chapter: number;
+
+//   @Column()
+//   status: string;
+
+//   @Column({ type:'json', nullable: true})
+//   scan: {
+//     name: string;
+//     url: string;
+//   }
+
+//   @Column()
+//   imageUrl: string;
+// }
+
+
+
+
+

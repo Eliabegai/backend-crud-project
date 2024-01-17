@@ -27,12 +27,14 @@ export class AnimeListController {
   findAll() {
     return this.animeListService.findAll()
   }
-
+  //requisição /animes/status/:status
   @Get('/status/:status')
   findAllByStatus(@Param('status') status: string) {
+    console.log('open get status')
     return this.animeListService.findAllByStatus(status)
   }
-
+  
+  //requisição /animes/name/:name
   @Get('/name/:name')
   findAllByName(@Param('name') name: string) {
     return this.animeListService.findAllByName(name)
@@ -40,16 +42,16 @@ export class AnimeListController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.animeListService.findOne(+id);
+    return this.animeListService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() upadateAnimeListDto: UpdateAnimeListDto) {
-    return this.animeListService.update(+id, upadateAnimeListDto);
+    return this.animeListService.update(id, upadateAnimeListDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.animeListService.remove(+id);
+    return this.animeListService.remove(id);
   }
 }

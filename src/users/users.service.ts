@@ -1,33 +1,39 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
+import { User, UserDocument } from './entities/user.entity';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { DeleteResult } from 'typeorm/driver/mongodb/typings';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
-  ) {}
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+
   create(createUserDto: CreateUserDto) {
-    return this.userRepository.save(createUserDto);
+    const user = new this.userModel(createUserDto)
+    return user.save();
   }
 
   findAll() {
-    return this.userRepository.find();
+    return this.userModel.find();
   }
 
-  findOne(id: number) {
-    return this.userRepository.findOneBy({ id: id });
+  findOne(id: string) {
+    return this.userModel.findById(id);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return this.userRepository.update(id, updateUserDto);
+  update(id: string, updateUserDto: UpdateUserDto) {
+    return this.userModel.findByIdAndUpdate({
+      _id: id
+    },{
+      $set: updateUserDto
+    }, {
+      new: true
+    });
   }
 
-  remove(id: number) {
-    return this.userRepository.delete(id);
+  remove(id: string):Promise<DeleteResult> {
+    return this.userModel.deleteOne({ _id : id }).exec();
   }
 }
