@@ -1,12 +1,12 @@
 {
   "name": "crud-project",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Projeto crud-backend",
+  "author": "Eliabe Gai",
   "private": true,
   "license": "UNLICENSED",
   "engines": {
-    "node": "21.x"
+    "node": "^18.x"
   },
   "scripts": {
     "build": "nest build",
