@@ -1,4 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import 'dotenv'
+
+require('dotenv').config()
 
 @Injectable()
 export class AppService {
@@ -9,6 +12,7 @@ export class AppService {
       <p>use /animes para ver a lista de animes</p>
       <p>use /users para ver os usuários</p>
 
+      ${process.env.MONGODB_USER}
 
       <p>Create by <strong>Eliabe Gai</strong></p>
     </div>
