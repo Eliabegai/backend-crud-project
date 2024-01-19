@@ -13,7 +13,7 @@ export class AppService {
       <p>use /users para ver os usuários</p>
 
       <p>${process.env.MONGODB_USER}</p>
-      <p>${process.env.MONGODB_PORT}</p>
+      <p>${process.env.PORT}</p>
 
       <p>Create by <strong>Eliabe Gai</strong></p>
     </div>
