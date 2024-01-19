@@ -12,8 +12,8 @@ export class AppService {
       <p>use /animes para ver a lista de animes</p>
       <p>use /users para ver os usuários</p>
 
-      ${process.env.MONGODB_USER}
-      ${process.env.MONGODB_PORT}
+      <p>${process.env.MONGODB_USER}</p>
+      <p>${process.env.MONGODB_PORT}</p>
 
       <p>Create by <strong>Eliabe Gai</strong></p>
     </div>
