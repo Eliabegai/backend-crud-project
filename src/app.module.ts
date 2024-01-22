@@ -10,7 +10,7 @@ require('dotenv').config()
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.MONGODB_USER),
+    MongooseModule.forRoot(process.env.MONGODB_URI),
     // UsersModule, 
     AnimeListModule
   ],
