@@ -2,7 +2,7 @@
 export class CreateAnimeListDto {
   name?: string
   type?: string
-  chapter?: number
+  chapter?: string
   status?: string
   scanName?: string
   scanUrl?: string

@@ -18,7 +18,7 @@ export class AnimeListService {
 
   async findAll() {
 
-    const data = await this.animeModel.find().sort({ name: 1 })
+    const data = await this.animeModel.find({}, {__v: false}).sort({name: +1}).exec()
 
     return {
       data: data,
@@ -40,7 +40,7 @@ export class AnimeListService {
 
     const data = await this.animeModel.find({ name: {
       "$regex": name
-    } }).sort({ name: 1})
+    } }).sort({ name: +1})
 
     return {
       data: data,

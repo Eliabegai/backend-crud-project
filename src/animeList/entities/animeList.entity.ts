@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { Document } from 'mongoose';
 
 export type AnimeDocument = NewAnimeList & Document;
 
@@ -15,7 +15,7 @@ export class NewAnimeList {
   password: string;
 
   @Prop()
-  chapter: number;
+  chapter: string;
 
   @Prop()
   status: string;
