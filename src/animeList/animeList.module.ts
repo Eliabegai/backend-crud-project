@@ -11,7 +11,8 @@ import { MongooseModule } from '@nestjs/mongoose';
     { 
       name: NewAnimeList.name, 
       schema: AnimeSchema }
-  ])],
+  ])
+],
   controllers: [AnimeListController],
   providers: [AnimeListService],
 })
