@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAnimeListDto } from './dto/create-animeList.dto';
 import { UpdateAnimeListDto } from './dto/update-animeList.dto';
-import { AnimeDocument, NewAnimeList } from './entities/animeList.entity';
+import { AnimeDocument } from './entities/animeList.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { DeleteResult } from 'typeorm/driver/mongodb/typings';
@@ -9,7 +9,7 @@ import { DeleteResult } from 'typeorm/driver/mongodb/typings';
 @Injectable()
 export class AnimeListService {
 
-  constructor(@InjectModel(NewAnimeList.name) private animeModel: Model<AnimeDocument>) {}
+  constructor(@InjectModel('AnimeList') private animeModel: Model<AnimeDocument>) {}
   
   create(createAnimeListDto: CreateAnimeListDto) {
     const anime = new this.animeModel(createAnimeListDto)
