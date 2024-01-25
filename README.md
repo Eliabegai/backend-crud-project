@@ -71,3 +71,16 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+# Liberar acesso ao mongodb by atlas
+# Create an IP access list entry using the current IP address:
+``` bash
+atlas accessList create --currentIp
+```
+documentation: https://www.mongodb.com/docs/atlas/cli/stable/command/atlas-accessLists-create/
+
+docker:
+``` bash
+docker run -p80:8080 nest-cloud-run
+```

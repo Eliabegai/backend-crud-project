@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      target: development
+    command: ["node", "run", "--host=0.0.0.0", "--debug"]
+    volumes:
+      - .:/nest-docker
+    ports:
+      - 8080:8080
