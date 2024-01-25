@@ -30,7 +30,6 @@ export class AnimeListController {
   //requisição /animes/status/:status
   @Get('/status/:status')
   findAllByStatus(@Param('status') status: string) {
-    console.log('open get status')
     return this.animeListService.findAllByStatus(status)
   }
   
