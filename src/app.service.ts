@@ -11,10 +11,7 @@ export class AppService {
 
       <p>Create by <strong>Eliabe Gai</strong></p>
     </div>
-    `
+    `;
     return text;
-  }
-  serveFavicon() {
-    return 'favicon'
   }
 }
