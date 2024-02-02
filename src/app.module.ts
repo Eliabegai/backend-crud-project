@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { AnimeListModule } from './animeList/animeList.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AnimeSchema } from './animeList/entities/animeList.entity';
+import { AuthModule } from './auth/auth.module';
 import 'dotenv'
 
 require('dotenv').config()
@@ -16,7 +17,8 @@ require('dotenv').config()
         name: 'AnimeList', 
         schema: AnimeSchema }
     ]),
-    AnimeListModule
+    AnimeListModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
