@@ -5,52 +5,56 @@ import {
   Body,
   Patch,
   Param,
-  Delete
-} from '@nestjs/common';
+  Delete,
+  UseGuards,
+} from "@nestjs/common";
 
-import { AnimeListService } from './animeList.service';
-import { CreateAnimeListDto } from './dto/create-animeList.dto';
-import { UpdateAnimeListDto } from './dto/update-animeList.dto';
+import { AnimeListService } from "./animeList.service";
+import { CreateAnimeListDto } from "./dto/create-animeList.dto";
+import { UpdateAnimeListDto } from "./dto/update-animeList.dto";
+import { AuthGuard } from "src/auth/auth.guard";
 
-@Controller('/animes')
+@UseGuards(AuthGuard)
+@Controller("/animes")
 export class AnimeListController {
-  constructor(
-    private readonly animeListService: AnimeListService
-  ){}
+  constructor(private readonly animeListService: AnimeListService) {}
 
   @Post()
-  async create(@Body() createAnimeListDto:CreateAnimeListDto){
-    return await this.animeListService.create(createAnimeListDto)
+  async create(@Body() createAnimeListDto: CreateAnimeListDto) {
+    return await this.animeListService.create(createAnimeListDto);
   }
 
   @Get()
   findAll() {
-    return this.animeListService.findAll()
+    return this.animeListService.findAll();
   }
   //requisição /animes/status/:status
-  @Get('/status/:status')
-  findAllByStatus(@Param('status') status: string) {
-    return this.animeListService.findAllByStatus(status)
-  }
-  
-  //requisição /animes/name/:name
-  @Get('/name/:name')
-  findAllByName(@Param('name') name: string) {
-    return this.animeListService.findAllByName(name)
+  @Get("/status/:status")
+  findAllByStatus(@Param("status") status: string) {
+    return this.animeListService.findAllByStatus(status);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  //requisição /animes/name/:name
+  @Get("/name/:name")
+  findAllByName(@Param("name") name: string) {
+    return this.animeListService.findAllByName(name);
+  }
+
+  @Get(":id")
+  findOne(@Param("id") id: string) {
     return this.animeListService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() upadateAnimeListDto: UpdateAnimeListDto) {
+  @Patch(":id")
+  update(
+    @Param("id") id: string,
+    @Body() upadateAnimeListDto: UpdateAnimeListDto,
+  ) {
     return this.animeListService.update(id, upadateAnimeListDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete(":id")
+  remove(@Param("id") id: string) {
     return this.animeListService.remove(id);
   }
 }
