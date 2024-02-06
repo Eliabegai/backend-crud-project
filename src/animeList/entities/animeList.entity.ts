@@ -1,5 +1,5 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document } from "mongoose";
 
 export type AnimeDocument = NewAnimeList & Document;
 
@@ -20,11 +20,11 @@ export class NewAnimeList {
   @Prop()
   status: string;
 
-  @Prop({ type: Array})
+  @Prop({ type: Array })
   scan: {
     name: string;
     url: string;
-  }
+  };
 
   @Prop()
   imageUrl: string;

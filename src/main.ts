@@ -1,10 +1,10 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { NestExpressApplication } from '@nestjs/platform-express';
-import 'dotenv';
+import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { NestExpressApplication } from "@nestjs/platform-express";
+import "dotenv";
 
 async function bootstrap() {
-  require('dotenv').config();
+  require("dotenv").config();
 
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors();
