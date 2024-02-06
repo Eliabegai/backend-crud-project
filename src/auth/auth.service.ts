@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { UsersService } from "src/users/users.service";
 import { JwtService } from "@nestjs/jwt";
 import { CreateUserDto } from "src/users/dto/create-user.dto";
@@ -12,20 +16,29 @@ export class AuthService {
 
   async singIn(
     signInDto: Record<string, any>,
-  ): Promise<{ access_token: string }> {
-    const user = await this.userService.findOne(signInDto.username);
-    if (user?.password !== user?.password) {
+  ): Promise<{ access_token?: string }> {
+    try {
+      const user = await this.userService.findOne(
+        signInDto.username,
+        signInDto.password,
+      );
+
+      const payload = {
+        username: user.username,
+        rule: user.rule,
+        status: user.status,
+      };
+      return {
+        access_token: await this.jwtService.signAsync(payload),
+      };
+    } catch {
       throw new UnauthorizedException();
     }
-    const payload = { sub: user.userId, username: user.username };
-    return {
-      access_token: await this.jwtService.signAsync(payload),
-    };
   }
 
   async createNewUser(
     signInDto: CreateUserDto,
-  ): Promise<{ access_token?: string; message?: string }> {
+  ): Promise<{ access_token?: string }> {
     try {
       await this.userService.create(signInDto);
 
@@ -36,12 +49,12 @@ export class AuthService {
       };
       return {
         access_token: await this.jwtService.signAsync(payload),
-        message: "Usuário Cadastrado com Sucesso!",
       };
     } catch (error) {
-      return {
-        message: error,
-      };
+      throw new BadRequestException("Something bad happened", {
+        cause: new Error(),
+        description: "Already registered user",
+      });
     }
   }
 }

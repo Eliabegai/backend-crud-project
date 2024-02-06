@@ -25,7 +25,11 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post("create")
   createNewUser(@Body() createUserDto: CreateUserDto) {
-    return this.authService.createNewUser(createUserDto);
+    try {
+      return this.authService.createNewUser(createUserDto);
+    } catch (error) {
+      return error;
+    }
   }
 
   @UseGuards(AuthGuard)

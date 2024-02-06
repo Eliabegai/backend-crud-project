@@ -32,8 +32,24 @@ export class UsersService {
     }
   }
 
-  async findOne(username: string): Promise<User | undefined> {
-    // return this.users.find((user) => user.username === username);
-    return username;
+  async findOne(username: string, password: string): Promise<User | undefined> {
+    const data = await this.userModel.find(
+      {
+        $or: [{ username: { $in: username } }],
+      },
+      {
+        __v: false,
+      },
+    );
+
+    const isMatch = await bcrypt.compare(password, data[0].password);
+
+    try {
+      if (isMatch) {
+        return data;
+      }
+    } catch (error) {
+      return error;
+    }
   }
 }
