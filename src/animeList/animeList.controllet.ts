@@ -12,9 +12,9 @@ import {
 import { AnimeListService } from "./animeList.service";
 import { CreateAnimeListDto } from "./dto/create-animeList.dto";
 import { UpdateAnimeListDto } from "./dto/update-animeList.dto";
-// import { AuthGuard } from "src/auth/auth.guard";
+import { AuthGuard } from "src/auth/auth.guard";
 
-// @UseGuards(AuthGuard)
+@UseGuards(AuthGuard)
 @Controller("/animes")
 export class AnimeListController {
   constructor(private readonly animeListService: AnimeListService) {}
@@ -28,6 +28,7 @@ export class AnimeListController {
   findAll() {
     return this.animeListService.findAll();
   }
+
   //requisição /animes/status/:status
   @Get("/status/:status")
   findAllByStatus(@Param("status") status: string) {

@@ -30,12 +30,15 @@ export class AnimeListService {
   }
 
   async findAllByStatus(status: string) {
-    const data = await this.animeModel.find(
-      {
-        $or: [{ status: { $in: status } }],
-      },
-      { __v: false },
-    );
+    const data = await this.animeModel
+      .find(
+        {
+          $or: [{ status: { $in: status } }],
+        },
+        { __v: false },
+      )
+      .sort({ name: +1 })
+      .exec();
 
     return {
       data: data,
