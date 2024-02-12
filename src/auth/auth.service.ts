@@ -16,7 +16,7 @@ export class AuthService {
 
   async singIn(
     signInDto: Record<string, any>,
-  ): Promise<{ access_token?: string }> {
+  ): Promise<{ access_token: string }> {
     try {
       const user = await this.userService.findOne(
         signInDto.username,
@@ -24,10 +24,12 @@ export class AuthService {
       );
 
       const payload = {
-        username: user.username,
-        rule: user.rule,
-        status: user.status,
+        name: user[0].name,
+        username: user[0].username,
+        rule: user[0].rule,
+        status: user[0].status,
       };
+      console.log(user[0].username);
       return {
         access_token: await this.jwtService.signAsync(payload),
       };
@@ -43,6 +45,7 @@ export class AuthService {
       await this.userService.create(signInDto);
 
       const payload = {
+        name: signInDto.name,
         username: signInDto.username,
         rule: signInDto.rule,
         status: signInDto.status,
