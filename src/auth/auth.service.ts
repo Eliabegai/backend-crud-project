@@ -6,13 +6,24 @@ import {
 import { UsersService } from "src/users/users.service";
 import { JwtService } from "@nestjs/jwt";
 import { CreateUserDto } from "src/users/dto/create-user.dto";
+import { v4 as uuidv4 } from "uuid";
+import { PayloadProps } from "./types/payload.props";
 
 @Injectable()
 export class AuthService {
   constructor(
-    private userService: UsersService,
-    private jwtService: JwtService,
+    private readonly userService: UsersService,
+    private readonly jwtService: JwtService,
   ) {}
+
+  async createAccessToken(payload: PayloadProps) {
+    const tokenId = uuidv4();
+
+    return this.jwtService.signAsync(
+      { payload: payload, tokenId: tokenId },
+      { expiresIn: "2d" },
+    );
+  }
 
   async singIn(
     signInDto: Record<string, any>,
@@ -29,9 +40,8 @@ export class AuthService {
         rule: user[0].rule,
         status: user[0].status,
       };
-      console.log(user[0].username);
       return {
-        access_token: await this.jwtService.signAsync(payload),
+        access_token: await this.createAccessToken(payload),
       };
     } catch {
       throw new UnauthorizedException();
@@ -51,7 +61,7 @@ export class AuthService {
         status: signInDto.status,
       };
       return {
-        access_token: await this.jwtService.signAsync(payload),
+        access_token: await this.createAccessToken(payload),
       };
     } catch (error) {
       throw new BadRequestException("Something bad happened", {

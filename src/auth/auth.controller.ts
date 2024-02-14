@@ -14,11 +14,11 @@ import { CreateUserDto } from "src/users/dto/create-user.dto";
 
 @Controller("auth")
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @HttpCode(HttpStatus.OK)
   @Post("login")
-  signIn(@Body() signInDto: Record<string, any>) {
+  async signIn(@Body() signInDto: Record<string, any>) {
     return this.authService.singIn(signInDto);
   }
 

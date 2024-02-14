@@ -89,3 +89,9 @@ docker:
 docker build -t eliabe/backend_anime .
 docker run -p 80:8080 eliabe/backend_anime
 ```
+
+para desenvolvimento:
+``` bash
+docker build -t dev/backend_anime .
+docker run -p 90:8080 dev/backend_anime
+```
