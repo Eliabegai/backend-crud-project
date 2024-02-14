@@ -75,12 +75,17 @@ Nest is [MIT licensed](LICENSE).
 
 # Liberar acesso ao mongodb by atlas
 # Create an IP access list entry using the current IP address:
+
+install atlas: https://www.mongodb.com/docs/atlas/cli/stable/install-atlas-cli/#std-label-install-atlas-cli
+
 ``` bash
+atlas login
 atlas accessList create --currentIp
 ```
 documentation: https://www.mongodb.com/docs/atlas/cli/stable/command/atlas-accessLists-create/
 
 docker:
 ``` bash
-docker run -p80:8080 nest-cloud-run
+docker build -t eliabe/backend_anime .
+docker run -p 80:8080 eliabe/backend_anime
 ```
