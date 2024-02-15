@@ -5,16 +5,16 @@ FROM node:20
 WORKDIR /usr/src/app
 
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
-COPY package*.json ./
+COPY package*.json .
 
 # Install app dependencies
 RUN npm install
 
 # Bundle app source
-COPY . .
+COPY /dist .
 
 # Copy the .env and .env.development files
-COPY .env ./
+COPY .env .
 
 # Creates a "dist" folder with the production build
 RUN npm run build
