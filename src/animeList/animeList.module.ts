@@ -5,6 +5,7 @@ import { AnimeSchema } from "./entities/animeList.entity";
 import { MongooseModule } from "@nestjs/mongoose";
 
 import "dotenv";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require("dotenv").config();
 
 @Module({

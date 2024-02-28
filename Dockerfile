@@ -1,5 +1,5 @@
 # Base image
-FROM node:20
+FROM node:20 as development
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -11,9 +11,8 @@ COPY package*.json .
 RUN npm install
 
 # Bundle app source
-COPY /dist .
+COPY . .
 
-# Copy the .env and .env.development files
 COPY .env .
 
 # Creates a "dist" folder with the production build
