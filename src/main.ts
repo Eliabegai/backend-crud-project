@@ -1,15 +1,17 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { NestExpressApplication } from "@nestjs/platform-express";
-import "dotenv";
+import { config } from "dotenv";
+import * as coockieParser from "cookie-parser";
 
 async function bootstrap() {
-  require("dotenv").config();
+  config();
 
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors();
+  app.use(coockieParser());
 
-  const port = process.env.PORT || 8080;
+  const port = process.env.PORT || 3333;
 
   await app.listen(port);
 

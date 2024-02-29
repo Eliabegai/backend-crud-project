@@ -19,7 +19,8 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post("login")
   async signIn(@Body() signInDto: Record<string, any>) {
-    return this.authService.singIn(signInDto);
+    const authUser = await this.authService.singIn(signInDto);
+    return authUser;
   }
 
   @HttpCode(HttpStatus.OK)

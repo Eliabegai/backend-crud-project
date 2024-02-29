@@ -1,21 +1,21 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AnimeListModule } from './animeList/animeList.module';
-import { MongooseModule } from '@nestjs/mongoose';
-import { AnimeSchema } from './animeList/entities/animeList.entity';
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
-import 'dotenv';
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { AnimeListModule } from "./animeList/animeList.module";
+import { MongooseModule } from "@nestjs/mongoose";
+import { AnimeSchema } from "./animeList/entities/animeList.entity";
+import { AuthModule } from "./auth/auth.module";
+import { UsersModule } from "./users/users.module";
+import { config as dotenvConfig } from "dotenv";
 
-require('dotenv').config();
+dotenvConfig();
 
 @Module({
   imports: [
     MongooseModule.forRoot(process.env.MONGODB_URI),
     MongooseModule.forFeature([
       {
-        name: 'AnimeList',
+        name: "AnimeList",
         schema: AnimeSchema,
       },
     ]),

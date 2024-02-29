@@ -21,13 +21,17 @@ export class AuthService {
 
     return this.jwtService.signAsync(
       { payload: payload, tokenId: tokenId },
-      { expiresIn: "2d" },
+      { expiresIn: "3m" },
     );
+  }
+
+  async refreshAccessToken(payload: PayloadProps) {
+    return this.jwtService.signAsync({ payload: payload }, { expiresIn: "1d" });
   }
 
   async singIn(
     signInDto: Record<string, any>,
-  ): Promise<{ access_token: string }> {
+  ): Promise<{ access_token: string; refresh_token: string }> {
     try {
       const user = await this.userService.findOne(
         signInDto.username,
@@ -42,6 +46,7 @@ export class AuthService {
       };
       return {
         access_token: await this.createAccessToken(payload),
+        refresh_token: await this.refreshAccessToken(payload),
       };
     } catch {
       throw new UnauthorizedException();
